@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser</title>
+</head>
+<body>
+    <h1>Resume Parser</h1>
+    
+    {% if file_uploaded %}
+    <h2>File Uploaded Successfully</h2>
+    <form action="/extracted_info" method="GET">
+        <button type="submit">Extract Information</button>
+    </form>
+    {% else %}
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+    {% endif %}
+    
+    {% if extracted_info %}
+    <h2>Extracted Information</h2>
+    <h3>Skills:</h3>
+    <ul>
+        {% for skill in extracted_info['skills'] %}
+        <li>{{ skill }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Education:</h3>
+    <ul>
+        {% for education in extracted_info['education'] %}
+        <li>{{ education }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Add sections for work experience, certifications, and contact information if available -->
+    {% endif %}
+</body>
+</html>
