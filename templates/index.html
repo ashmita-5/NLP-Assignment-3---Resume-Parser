@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parser</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Resume Parser</h1>
+        
+        <form action="/" method="POST" enctype="multipart/form-data" class="upload-form mb-4">
+            <label for="fileInput" class="file-label">Choose File</label>
+            <input type="file" id="fileInput" name="file" class="file-input">
+            <button type="submit" class="upload-button btn btn-primary">Upload</button>
+        </form>
+        
+        {% if extracted_info %}
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Skills</h2>
+                <ul class="list-group">
+                    {% for skill in extracted_info['skills'] %}
+                    <li class="list-group-item">{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h2>Education</h2>
+                <ul class="list-group">
+                    {% for education in extracted_info['education'] %}
+                    <li class="list-group-item">{{ education }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h2>Email</h2>
+                <ul class="list-group">
+                    {% for email in extracted_info['emails'] %}
+                    <li class="list-group-item">{{ email }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+        <form action="/download" method="POST" class="mt-4">
+            <button type="submit" class="btn btn-primary">Download as CSV</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>
