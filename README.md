@@ -1,9 +1,4 @@
-# NLP-Assignment-4--Resume-Parser
-
-## Student Info
-
-Ashmita Phuyal(124454)
-
+# Resume Parser
 
 The Resume Parser is updated by adding the functionality to extract skills, education and contact information.The SpaCy's entity recognition capabilities to identify and extract these additional details from the resume text.
 
